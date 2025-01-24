@@ -54,7 +54,7 @@ export default function Home() {
           Created by Rifqi Ahmad Fauzi - Bagian Data Center and Clouds
         </span>
         <a
-          href="https://www.linkedin.com/in/rifqiahmad/"
+          href="https://www.linkedin.com/in/rifqiahmadf/"
           target="_blank"
           rel="noopener noreferrer"
           className="mt-2 bg-blue-500 hover:bg-blue-600 text-white p-1.5 rounded-full transition-colors duration-200"
