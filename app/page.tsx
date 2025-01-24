@@ -30,9 +30,22 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between p-4 bg-gray-100">
       <div className="w-full max-w-6xl mx-auto">
         <div className="flex justify-between items-center mb-4">
-          <h1 className="text-2xl font-bold">Chatpos Alpha</h1>
+          {/* Group title and Notes button */}
+          <div className="flex items-center space-x-4">
+            <h1 className="text-2xl font-bold">Chatpos Alpha</h1>
+            <Button
+              className="relative border border-gray-300 bg-white text-black hover:bg-gray-50"
+              onClick={() => console.log("Notes clicked")}
+            >
+              Notes
+              <span className="animate-ping absolute top-1 right-1 h-2 w-2 rounded-full bg-blue-600/80"></span>
+            </Button>
+          </div>
+
+          {/* Logout on the far right */}
           <Button onClick={signOut}>Logout</Button>
         </div>
+
         <Card className="w-full">
           <CardContent className="p-0 overflow-hidden">
             <iframe
