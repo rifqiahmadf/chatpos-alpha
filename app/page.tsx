@@ -49,7 +49,7 @@ export default function Home() {
         <Card className="w-full">
           <CardContent className="p-0 overflow-hidden">
             <iframe
-              src="https://rifqi.alyafauzi.id/chat/share?shared_id=c59cc09edeb411ef92680242ac120006&from=chat&auth=AyOTQ2Y2FlZGViNTExZWY4NmYwMDI0Mm"
+              src="https://ragflow.byrifqi.com/chat/share?shared_id=f4c72e52ed6611ef983c0242ac120006&from=chat&auth=Q0ZmUxNzc2ZWQxNTExZWY4NTA2MDI0Mm"
               style={{
                 width: "100%",
                 height: "calc(100vh - 200px)",
