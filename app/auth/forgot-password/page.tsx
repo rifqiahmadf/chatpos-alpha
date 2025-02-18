@@ -1,51 +1,60 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Label } from "@/components/ui/label"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { AlertCircle } from "lucide-react"
-import { useAuth } from "@/hooks/useAuth"
-import { toast } from "sonner"
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { AlertCircle } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { toast } from "sonner";
 
 export default function ForgotPasswordPage() {
-  const [email, setEmail] = useState("")
-  const [error, setError] = useState("")
-  const { resetPassword } = useAuth()
-  const router = useRouter()
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const { resetPassword } = useAuth();
+  const router = useRouter();
 
   const validateEmail = (email: string) => {
-    const domain = "@posindonesia.co.id"
-    return email.endsWith(domain) && email.length > domain.length
-  }
+    const domain = "@posindonesia.co.id";
+    return email.endsWith(domain) && email.length > domain.length;
+  };
 
   const handleResetPassword = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError("")
+    e.preventDefault();
+    setError("");
 
     if (!validateEmail(email)) {
-      setError("Email must use the @posindonesia.co.id domain.")
-      return
+      setError("Email must use the @posindonesia.co.id domain.");
+      return;
     }
 
     try {
-      await resetPassword(email)
-      toast.success("Password reset email sent. Please check your inbox.")
-      router.push("/auth")
+      await resetPassword(email);
+      toast.success("Password reset email sent. Please check your inbox.");
+      router.push("/auth");
     } catch (error) {
       // Error is handled by the hook and displayed via toast
     }
-  }
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <Card className="w-[400px]">
         <CardHeader>
           <CardTitle>Forgot Password</CardTitle>
-          <CardDescription>Enter your email to reset your password</CardDescription>
+          <CardDescription>
+            Enter your email to reset your password
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleResetPassword}>
@@ -72,12 +81,19 @@ export default function ForgotPasswordPage() {
             <Alert variant="destructive" className="mt-4">
               <AlertCircle className="h-4 w-4" />
               <AlertTitle>Error</AlertTitle>
-              <AlertDescription>{error}</AlertDescription>
+              <AlertDescription className="text-xs">{error}</AlertDescription>
             </Alert>
           )}
+          {/* Back button */}
+          <Button
+            variant="outline"
+            className="w-full mt-4"
+            onClick={() => router.push("/auth")}
+          >
+            Back
+          </Button>
         </CardFooter>
       </Card>
     </div>
-  )
+  );
 }
-

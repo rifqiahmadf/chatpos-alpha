@@ -15,9 +15,10 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertCircle, Linkedin } from "lucide-react";
+import { AlertCircle, Linkedin, Eye, EyeOff } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
+import { cn } from "@/lib/utils";
 
 export default function AuthPage() {
   const [email, setEmail] = useState("");
@@ -27,6 +28,8 @@ export default function AuthPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [passwordStrength, setPasswordStrength] = useState("");
   const [activeTab, setActiveTab] = useState("login");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showRetypePassword, setShowRetypePassword] = useState(false);
   const { signIn, signUp, user } = useAuth();
 
   useEffect(() => {
@@ -44,10 +47,12 @@ export default function AuthPage() {
     const strongRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
     if (strongRegex.test(password)) {
-      setPasswordStrength("strong");
+      setPasswordStrength("Your password is secure.");
       return true;
     } else {
-      setPasswordStrength("weak");
+      setPasswordStrength(
+        "Must be at least 8 characters, including an uppercase letter, a lowercase letter, a number, and a special character."
+      );
       return false;
     }
   };
@@ -140,11 +145,14 @@ export default function AuthPage() {
 
   const handleTabChange = (value: string) => {
     setActiveTab(value);
+    // Reset states when switching tabs
     setEmail("");
     setPassword("");
     setRetypePassword("");
     setPasswordStrength("");
     setError("");
+    setShowPassword(false);
+    setShowRetypePassword(false);
   };
 
   return (
@@ -163,28 +171,50 @@ export default function AuthPage() {
             <TabsContent value="login">
               <form onSubmit={handleLogin}>
                 <div className="grid w-full items-center gap-4">
-                  <div className="flex flex-col space-y-1.5">
+                  <div className="space-y-2">
                     <Label htmlFor="email">Email</Label>
                     <Input
                       id="email"
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="name@posindonesia.co.id"
+                      placeholder="email@posindonesia.co.id"
                       required
                       disabled={isLoading}
                     />
                   </div>
-                  <div className="flex flex-col space-y-1.5">
-                    <Label htmlFor="password">Password</Label>
-                    <Input
-                      id="password"
-                      type="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                      disabled={isLoading}
-                    />
+                  <div className="space-y-2">
+                    <Label htmlFor="login-password">Password</Label>
+                    <div className="relative">
+                      <Input
+                        id="login-password"
+                        type={showPassword ? "text" : "password"}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        disabled={isLoading}
+                        placeholder="Enter your password"
+                      />
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        className={cn(
+                          "absolute right-2 top-1/2 -translate-y-1/2",
+                          "hover:bg-transparent hover:opacity-70 transition-opacity"
+                        )}
+                        size="icon"
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword ? (
+                          <EyeOff className="h-4 w-4" />
+                        ) : (
+                          <Eye className="h-4 w-4" />
+                        )}
+                        <span className="sr-only">
+                          {showPassword ? "Hide password" : "Show password"}
+                        </span>
+                      </Button>
+                    </div>
                   </div>
                 </div>
                 <Button
@@ -207,53 +237,102 @@ export default function AuthPage() {
             <TabsContent value="register">
               <form onSubmit={handleRegister}>
                 <div className="grid w-full items-center gap-4">
-                  <div className="flex flex-col space-y-1.5">
+                  <div className="space-y-2">
                     <Label htmlFor="register-email">Email</Label>
                     <Input
                       id="register-email"
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="name@posindonesia.co.id"
+                      placeholder="email@posindonesia.co.id"
                       required
                       disabled={isLoading}
                     />
                   </div>
-                  <div className="flex flex-col space-y-1.5">
+                  <div className="space-y-2">
                     <Label htmlFor="register-password">Password</Label>
-                    <Input
-                      id="register-password"
-                      type="password"
-                      value={password}
-                      onChange={(e) => {
-                        setPassword(e.target.value);
-                        validatePassword(e.target.value);
-                      }}
-                      required
-                      disabled={isLoading}
-                    />
+                    <div className="relative">
+                      <Input
+                        id="register-password"
+                        type={showPassword ? "text" : "password"}
+                        value={password}
+                        onChange={(e) => {
+                          setPassword(e.target.value);
+                          validatePassword(e.target.value);
+                        }}
+                        required
+                        disabled={isLoading}
+                        placeholder="Enter your password"
+                      />
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        className={cn(
+                          "absolute right-2 top-1/2 -translate-y-1/2",
+                          "hover:bg-transparent hover:opacity-70 transition-opacity"
+                        )}
+                        size="icon"
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword ? (
+                          <EyeOff className="h-4 w-4" />
+                        ) : (
+                          <Eye className="h-4 w-4" />
+                        )}
+                        <span className="sr-only">
+                          {showPassword ? "Hide password" : "Show password"}
+                        </span>
+                      </Button>
+                    </div>
                     {passwordStrength && (
                       <p
-                        className={`text-sm ${
-                          passwordStrength === "strong"
+                        className={cn(
+                          "text-xs",
+                          passwordStrength === "Your password is secure."
                             ? "text-green-500"
                             : "text-red-500"
-                        }`}
+                        )}
                       >
-                        Password strength: {passwordStrength}
+                        {passwordStrength}
                       </p>
                     )}
                   </div>
-                  <div className="flex flex-col space-y-1.5">
+                  <div className="space-y-2">
                     <Label htmlFor="retype-password">Retype Password</Label>
-                    <Input
-                      id="retype-password"
-                      type="password"
-                      value={retypePassword}
-                      onChange={(e) => setRetypePassword(e.target.value)}
-                      required
-                      disabled={isLoading}
-                    />
+                    <div className="relative">
+                      <Input
+                        id="retype-password"
+                        type={showRetypePassword ? "text" : "password"}
+                        value={retypePassword}
+                        onChange={(e) => setRetypePassword(e.target.value)}
+                        required
+                        disabled={isLoading}
+                        placeholder="Retype your password"
+                      />
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        className={cn(
+                          "absolute right-2 top-1/2 -translate-y-1/2",
+                          "hover:bg-transparent hover:opacity-70 transition-opacity"
+                        )}
+                        size="icon"
+                        onClick={() =>
+                          setShowRetypePassword(!showRetypePassword)
+                        }
+                      >
+                        {showRetypePassword ? (
+                          <EyeOff className="h-4 w-4" />
+                        ) : (
+                          <Eye className="h-4 w-4" />
+                        )}
+                        <span className="sr-only">
+                          {showRetypePassword
+                            ? "Hide password"
+                            : "Show password"}
+                        </span>
+                      </Button>
+                    </div>
                   </div>
                 </div>
                 <Button
@@ -271,8 +350,8 @@ export default function AuthPage() {
           {error && (
             <Alert variant="destructive" className="mt-4">
               <AlertCircle className="h-4 w-4" />
-              <AlertTitle>Error</AlertTitle>
-              <AlertDescription>{error}</AlertDescription>
+              <AlertTitle className="text-sm">Error</AlertTitle>
+              <AlertDescription className="text-xs">{error}</AlertDescription>
             </Alert>
           )}
         </CardFooter>
