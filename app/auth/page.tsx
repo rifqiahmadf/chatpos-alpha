@@ -40,8 +40,6 @@ export default function AuthPage() {
 
   const validateEmail = (email: string) => {
     const domain = "@posindonesia.co.id";
-    // Allow dummy user email regardless of domain check.
-    if (email === "dummy@posindonesia.com") return true;
     return email.endsWith(domain) && email.length > domain.length;
   };
 
@@ -158,7 +156,7 @@ export default function AuthPage() {
   };
 
   const handleUseDummy = () => {
-    setEmail("dummy@posindonesia.com");
+    setEmail("dummy@posindonesia.co.id");
     setPassword("Dummy123!");
   };
 
