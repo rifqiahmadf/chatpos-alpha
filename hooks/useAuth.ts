@@ -56,7 +56,8 @@ export function useAuth() {
 
     if (!loading) {
       if (user) {
-        if (user.emailVerified) {
+        // if (user.emailVerified) {
+        if (user) {
           if (pathname === "/auth") {
             router.push("/");
           }
