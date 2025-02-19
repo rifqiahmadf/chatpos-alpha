@@ -21,6 +21,7 @@ const nextConfig = {
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
   },
+  crossOrigin: 'anonymous'
 }
 
 mergeConfig(nextConfig, userConfig)

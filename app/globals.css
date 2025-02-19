@@ -92,3 +92,9 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.karla-regular {
+  font-family: "Karla", serif;
+  font-weight: 400;
+  font-style: normal;
+}

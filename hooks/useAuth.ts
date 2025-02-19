@@ -31,6 +31,8 @@ const getErrorMessage = (error: AuthError) => {
       return "Network error. Please check your connection.";
     case "auth/too-many-requests":
       return "Too many attempts. Please try again later.";
+    case "auth/invalid-credential":
+      return "Invalid email address or password.";
     default:
       return "An error occurred. Please try again.";
   }

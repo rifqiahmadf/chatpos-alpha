@@ -159,8 +159,13 @@ export default function AuthPage() {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 pb-8">
       <Card className="w-[400px]">
         <CardHeader>
-          <CardTitle>Chatpos Alpha</CardTitle>
-          <CardDescription>Login or create an account</CardDescription>
+          <CardTitle
+            className="karla-regular text-2xl"
+            style={{ color: "#1e2e59" }}
+          >
+            DIVA Pos Indonesia
+          </CardTitle>
+          <CardDescription>Dynamic Intelligent Versatile Agent</CardDescription>
         </CardHeader>
         <CardContent>
           <Tabs value={activeTab} onValueChange={handleTabChange}>
@@ -225,14 +230,6 @@ export default function AuthPage() {
                   {isLoading ? "Loading..." : "Log in"}
                 </Button>
               </form>
-              <div className="mt-4 text-center">
-                <Link
-                  href="/auth/forgot-password"
-                  className="text-sm text-blue-600 hover:underline"
-                >
-                  Forgot password?
-                </Link>
-              </div>
             </TabsContent>
             <TabsContent value="register">
               <form onSubmit={handleRegister}>
@@ -345,6 +342,14 @@ export default function AuthPage() {
               </form>
             </TabsContent>
           </Tabs>
+          <div className="mt-4 text-center">
+            <Link
+              href="/auth/forgot-password"
+              className="text-sm text-blue-600 hover:underline"
+            >
+              Forgot password?
+            </Link>
+          </div>
         </CardContent>
         <CardFooter className="flex flex-col">
           {error && (

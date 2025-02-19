@@ -4,11 +4,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import { Linkedin } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import NotesModal from "@/components/NotesModal";
 
 export default function Home() {
   const { user, loading, signOut } = useAuth();
-  const proxyUrl = `/api/proxy?shared_id=e5b54d2cd80311efa1100242ac120006&from=chat&auth=IzMDUyMTlhZDgwMjExZWZhOWVkMDI0Mm`;
+  const [showNotes, setShowNotes] = useState(true);
 
   useEffect(() => {
     console.log(user);
@@ -32,10 +33,15 @@ export default function Home() {
         <div className="flex justify-between items-center mb-4">
           {/* Group title and Notes button */}
           <div className="flex items-center space-x-4">
-            <h1 className="text-2xl font-bold">Chatpos Alpha</h1>
+            <h1
+              className="karla-regular text-3xl font-bold"
+              style={{ color: "#1e2e59" }}
+            >
+              DIVA
+            </h1>
             <Button
               className="relative border border-gray-300 bg-white text-black hover:bg-gray-50"
-              onClick={() => console.log("Notes clicked")}
+              onClick={() => setShowNotes(true)}
             >
               Notes
               <span className="animate-ping absolute top-1 right-1 h-2 w-2 rounded-full bg-blue-600/80"></span>
@@ -49,7 +55,7 @@ export default function Home() {
         <Card className="w-full">
           <CardContent className="p-0 overflow-hidden">
             <iframe
-              src="https://ragflow.byrifqi.com/chat/share?shared_id=f4c72e52ed6611ef983c0242ac120006&from=chat&auth=Q0ZmUxNzc2ZWQxNTExZWY4NTA2MDI0Mm"
+              src="https://ragflow.byrifqi.com/chat/share?shared_id=380e02f6eed111ef8e360242ac120006&from=agent&auth=Q0ZmUxNzc2ZWQxNTExZWY4NTA2MDI0Mm"
               style={{
                 width: "100%",
                 height: "calc(100vh - 200px)",
@@ -75,6 +81,9 @@ export default function Home() {
           <Linkedin size={16} />
         </a>
       </footer>
+
+      {/* Render the Notes Modal */}
+      <NotesModal isOpen={showNotes} onClose={() => setShowNotes(false)} />
     </main>
   );
 }
