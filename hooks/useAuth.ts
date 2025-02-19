@@ -79,12 +79,12 @@ export function useAuth() {
         email,
         password
       );
-      if (!userCredential.user.emailVerified) {
-        toast.error("Please verify your email before logging in.");
-        await firebaseSignOut(auth);
-      } else {
-        toast.success("Successfully logged in!");
-      }
+      // if (!userCredential.user.emailVerified) {
+      //   toast.error("Please verify your email before logging in.");
+      //   await firebaseSignOut(auth);
+      // } else {
+      //   toast.success("Successfully logged in!");
+      // }
     } catch (error) {
       const authError = error as AuthError;
       toast.error(getErrorMessage(authError));

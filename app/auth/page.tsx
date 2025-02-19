@@ -32,14 +32,16 @@ export default function AuthPage() {
   const [showRetypePassword, setShowRetypePassword] = useState(false);
   const { signIn, signUp, user } = useAuth();
 
-  useEffect(() => {
-    if (user && !user.emailVerified) {
-      toast.error("Please verify your email before logging in.");
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user && !user.emailVerified) {
+  //     toast.error("Please verify your email before logging in.");
+  //   }
+  // }, [user]);
 
   const validateEmail = (email: string) => {
     const domain = "@posindonesia.co.id";
+    // Allow dummy user email regardless of domain check.
+    if (email === "dummy@posindonesia.com") return true;
     return email.endsWith(domain) && email.length > domain.length;
   };
 
@@ -155,6 +157,11 @@ export default function AuthPage() {
     setShowRetypePassword(false);
   };
 
+  const handleUseDummy = () => {
+    setEmail("dummy@posindonesia.com");
+    setPassword("Dummy123!");
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 pb-8">
       <Card className="w-[400px]">
@@ -177,7 +184,15 @@ export default function AuthPage() {
               <form onSubmit={handleLogin}>
                 <div className="grid w-full items-center gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
+                    <div className="flex items-center justify-between">
+                      <Label htmlFor="email">Email</Label>
+                      <span
+                        onClick={handleUseDummy}
+                        className="cursor-pointer text-xs text-blue-600 hover:underline"
+                      >
+                        use dummy user
+                      </span>
+                    </div>
                     <Input
                       id="email"
                       type="email"
