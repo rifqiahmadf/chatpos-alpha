@@ -55,7 +55,7 @@ export default function Home() {
         <Card className="w-full">
           <CardContent className="p-0 overflow-hidden">
             <iframe
-              src="https://ragflow.byrifqi.com/chat/share?shared_id=380e02f6eed111ef8e360242ac120006&from=agent&auth=Q0ZmUxNzc2ZWQxNTExZWY4NTA2MDI0Mm"
+              src="http://10.24.1.43:81/chat/share?shared_id=dda8f3e0257e11f09eefaa1f4bac762f&from=agent&auth=Y0NTA0OGY4MjU5MzExZjBhMWNkYWExZj"
               style={{
                 width: "100%",
                 height: "calc(100vh - 200px)",
