@@ -69,17 +69,7 @@ export default function Home() {
         </Card>
       </div>
       <footer className="mt-4 text-center text-sm text-gray-500 flex flex-col items-center">
-        <span>
-          Created by Rifqi Ahmad Fauzi - Bagian Data Center and Clouds
-        </span>
-        <a
-          href="https://www.linkedin.com/in/rifqiahmadf/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-2 bg-blue-500 hover:bg-blue-600 text-white p-1.5 rounded-full transition-colors duration-200"
-        >
-          <Linkedin size={16} />
-        </a>
+        <span>Created by TIM AI</span>
       </footer>
 
       {/* Render the Notes Modal */}
