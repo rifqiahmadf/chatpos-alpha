@@ -168,7 +168,7 @@ export default function AuthPage() {
             className="karla-regular text-2xl"
             style={{ color: "#1e2e59" }}
           >
-            DIVA Pos Indonesia
+            DAVA Pos Indonesia
           </CardTitle>
           <CardDescription>Dynamic Intelligent Versatile Agent</CardDescription>
         </CardHeader>

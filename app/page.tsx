@@ -37,7 +37,7 @@ export default function Home() {
               className="karla-regular text-3xl font-bold"
               style={{ color: "#1e2e59" }}
             >
-              DIVA
+              DAVA
             </h1>
             <Button
               className="relative border border-gray-300 bg-white text-black hover:bg-gray-50"
