@@ -6,7 +6,7 @@ import { Toaster } from "sonner";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "DIVA Pos Indonesia",
+  title: "DAVA Pos Indonesia",
   description: "A simple website with an embedded chat interface",
 };
 
